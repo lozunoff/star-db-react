@@ -1,0 +1,40 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/state-in-constructor": [2, "never"],
+        "no-underscore-dangle":  ["error", { "allow": [
+            "_apiBase",
+            "_imageBase",
+            "_transformPerson",
+            "_transformPlanet",
+            "_transformStarship",
+            "_imageBase"
+        ] }],
+        "react/jsx-props-no-spreading": [0],
+        "react/jsx-one-expression-per-line": [0],
+        "react/static-property-placement": [2, "static public field"]
+    }
+}
