@@ -1,0 +1,12 @@
+.pagination .disabled {
+  cursor: pointer;
+}
+
+.pagination .disabled:hover {
+  background-color: #00bc8c;
+}
+
+.pagination .page-link:focus {
+  outline: none;
+  box-shadow: none;
+}
