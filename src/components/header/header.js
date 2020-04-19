@@ -29,7 +29,14 @@ const Header = ({ onServiceChange, isLoggedIn, onLogout }) => (
         { isLoggedIn && <Link to="/" onClick={onLogout}>Logout</Link> }
       </li>
     </ul>
-    <button type="button" className="btn btn-primary btn-sm ml-auto mr-2" onClick={onServiceChange}>Change Service</button>
+    <div className="d-flex ml-auto mr-2">
+      <span className="d-flex align-items-center">Data source:</span>
+      <select className="form-control form-control-sm ml-2" onChange={(e) => onServiceChange(e.target.value)}>
+        <option value="swapi">swapi.dev</option>
+        <option value="localhost">json-server</option>
+        <option value="github">github.com</option>
+      </select>
+    </div>
     <ErrorButton />
   </div>
 );

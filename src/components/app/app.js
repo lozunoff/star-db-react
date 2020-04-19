@@ -19,6 +19,7 @@ import RandomPlanet from '../random-planet';
 import ErrorBoundry from '../error-boundry';
 import SwapiService from '../../services/swapi-service';
 import SwapiServiceGithub from '../../services/swapi-service-github';
+import SwapiServiceSwapi from '../../services/swapi-service-swapi';
 import { SwapiServiceProvider } from '../swapi-service-context';
 import StarshipDetails from '../sw-components/starship-details';
 
@@ -26,7 +27,7 @@ import './app.css';
 
 export default class App extends Component {
   state = {
-    swapiService: new SwapiService(),
+    swapiService: new SwapiServiceSwapi(),
     isLoggedIn: false,
   };
 
@@ -42,12 +43,25 @@ export default class App extends Component {
     });
   };
 
-  onServiceChange = () => {
-    this.setState(({ swapiService }) => {
-      const Service = swapiService instanceof SwapiService ? SwapiServiceGithub : SwapiService;
-      return {
-        swapiService: new Service(),
-      };
+  onServiceChange = (service) => {
+    let Service;
+
+    switch (service) {
+      case 'swapi':
+        Service = SwapiServiceSwapi;
+        break;
+      case 'localhost':
+        Service = SwapiService;
+        break;
+      case 'github':
+        Service = SwapiServiceGithub;
+        break;
+      default:
+        Service = SwapiServiceSwapi;
+    }
+
+    this.setState({
+      swapiService: new Service(),
     });
   };
 

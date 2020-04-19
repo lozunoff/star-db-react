@@ -30,3 +30,31 @@
   height: 2.2rem;
   margin-top: 3px;
 }
+
+.header span {
+  height: 35px;
+  margin-top: 2px;
+}
+
+.header select {
+  width: 110px;
+  height: 35px;
+  color: #fff;
+  background-color: #375a7f;
+  border-color: #375a7f;
+  margin-top: 3px;
+  padding-top: 2px;
+  cursor: pointer;
+}
+
+.header select:hover {
+  color: #fff;
+  background-color: #2b4764;
+  border-color: #28415b;
+}
+
+.header select:focus {
+  color: #fff;
+  background-color: #2b4764;
+  border-color: #28415b;
+}
