@@ -7,17 +7,12 @@ import Paginator from '../paginator';
 import './item-list.css';
 
 const ItemList = ({
-  data, onItemSelected, children: renderLabel, match,
+  allPages, data, onItemSelected, children: renderLabel, match,
 }) => {
   const { url, params: { pageNumber = '1' } } = match;
   const baseUrl = url.split('/')[1];
 
-  const allPages = Math.ceil(data.length / 10);
-
-  const start = pageNumber * 10 - 10;
-  const end = pageNumber * 10;
-
-  const items = data.slice(start, end).map((item) => {
+  const items = data.map((item) => {
     const { id } = item;
     const label = renderLabel(item);
 
@@ -45,6 +40,7 @@ const ItemList = ({
 };
 
 ItemList.propTypes = {
+  allPages: PropTypes.number.isRequired,
   onItemSelected: PropTypes.func.isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   children: PropTypes.func.isRequired,

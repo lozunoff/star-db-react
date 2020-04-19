@@ -31,7 +31,8 @@
             "_transformPerson",
             "_transformPlanet",
             "_transformStarship",
-            "_imageBase"
+            "_imageBase",
+            "_extractId"
         ] }],
         "react/jsx-props-no-spreading": [0],
         "react/jsx-one-expression-per-line": [0],

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 import ItemList from '../item-list';
 
@@ -41,18 +42,21 @@ const mapStarshipMethodsToProps = (swapiService) => ({
 
 const PersonList = compose(
   withSwapiService(mapPersonMethodsToProps),
+  withRouter,
   withData,
   withChildFunction(renderName),
 )(ItemList);
 
 const PlanetList = compose(
   withSwapiService(mapPlanetMethodsToProps),
+  withRouter,
   withData,
   withChildFunction(renderName),
 )(ItemList);
 
 const StarshipList = compose(
   withSwapiService(mapStarshipMethodsToProps),
+  withRouter,
   withData,
   withChildFunction(renderModelAndName),
 )(ItemList);

@@ -53,7 +53,7 @@ class RandomPlanet extends Component {
 
   updatePlanet= () => {
     const { getData } = this.props;
-    const id = Math.floor(Math.random() * 63 + 1);
+    const id = Math.floor(Math.random() * 60 + 1);
     getData(id)
       .then(this.onPlanetLoaded)
       .catch(this.onError);

@@ -7,10 +7,14 @@ import ErrorIndicator from '../error-indicator';
 const withData = (View) => class extends Component {
   static propTypes = {
     getData: PropTypes.func.isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.object,
+    }).isRequired,
   };
 
   state = {
     data: null,
+    allPages: 1,
     loading: true,
     error: false,
   };
@@ -20,23 +24,30 @@ const withData = (View) => class extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { getData } = this.props;
-    if (getData !== prevProps.getData) {
+    const { getData, match } = this.props;
+    const { pageNumber } = match.params;
+    const prevNumber = prevProps.match.params.pageNumber;
+
+    if (getData !== prevProps.getData
+          || (pageNumber !== prevNumber && prevNumber)
+                || (pageNumber > 1 && !prevNumber)) {
       this.update();
     }
   }
 
   update() {
-    const { getData } = this.props;
+    const { getData, match } = this.props;
+    const { pageNumber } = match.params;
 
     this.setState({
       loading: true,
       error: false,
     });
 
-    getData()
-      .then((data) => {
+    getData(pageNumber)
+      .then(({ allPages, data }) => {
         this.setState({
+          allPages,
           data,
           loading: false,
         });
@@ -50,7 +61,9 @@ const withData = (View) => class extends Component {
   }
 
   render() {
-    const { data, loading, error } = this.state;
+    const {
+      allPages, data, loading, error,
+    } = this.state;
 
     if (loading) {
       return <Spinner />;
@@ -60,7 +73,7 @@ const withData = (View) => class extends Component {
       return <ErrorIndicator />;
     }
 
-    return <View {...this.props} data={data} />;
+    return <View {...this.props} data={data} allPages={allPages} />;
   }
 };
 
